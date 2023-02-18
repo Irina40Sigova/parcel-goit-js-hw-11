@@ -1,0 +1,131 @@
+
+a {
+  text-decoration: none;
+}
+
+
+.search-form {
+    width: 60px;
+    display: flex;
+    margin: 30px auto;
+  justify-content: center;
+  color: yellowgreen;
+  }
+
+  .search-input {
+    font-size: 18px;
+    flex-grow: 1;
+    height: 40px;
+    padding-left: 15px;
+    border: 3px solid #753838;
+    border-radius: 8px;
+  }
+
+  .search-btn {
+    font-size: 14px;
+    padding: 10px 40px;
+    background: blue;
+    color:white;
+    border: none;
+    text-transform: uppercase;
+    margin-left: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 500ms;
+  }
+
+.search-btn:hover,
+.search-btn:focus {
+  background-color: rgb(18, 18, 161);
+}
+
+  .load-more {
+    font-size: 14px;
+    padding: 10px 20px;
+    background-color: blue;
+    color:white;
+    border: none;
+    text-transform: uppercase;
+    margin: 60px auto;
+    display: flex;
+    justify-content: center;  
+    border: 1px solid #303030;
+    border-radius: 8px;
+    transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 500ms;
+  }
+
+  .load-more:hover, 
+  .load-more:focus {
+  background-color: rgb(18, 18, 161);
+}
+
+.gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: -15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallery li {
+  margin: 15px;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  width: 348px;
+  height: 100%;
+  padding: 12px;
+}
+
+.photo-card > img {
+  border-radius: 12px;
+}
+.gallery__image {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 500ms;
+}
+
+.gallery__image:hover {
+  transform: scale(1.25);
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 25px;
+  background: #d5dbdf;
+  transition: box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery__item:hover,
+.gallery__item:focus {
+  box-shadow: 0px 1px 14px #19282f;
+  border: 1px solid #f9f9f9;
+}
+
+.info {
+  display: flex;
+  padding: 5px;
+  justify-content: space-around;
+  color: black;
+}
+
+.info-item {
+  display: flex;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  flex-direction: row;
+  margin: 5px;
+}
