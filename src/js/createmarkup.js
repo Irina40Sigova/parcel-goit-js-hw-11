@@ -1,4 +1,11 @@
-export default function createMarkup ({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) {
+export default function createMarkup ({
+   webformatURL,
+   largeImageURL,
+    tags,
+     likes,
+      views,
+       comments,
+        downloads}) {
     return `
     <li>
     <div class="photo-card">

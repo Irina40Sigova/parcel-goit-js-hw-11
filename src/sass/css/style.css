@@ -5,6 +5,7 @@ a {
 
 
 .search-form {
+ 
     width: 60px;
     display: flex;
     margin: 30px auto;
@@ -13,15 +14,19 @@ a {
   }
 
   .search-input {
+    font: inherit;
     font-size: 18px;
     flex-grow: 1;
     height: 40px;
     padding-left: 15px;
     border: 3px solid #753838;
-    border-radius: 8px;
+    border: none;
+    box-shadow:0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2); ;
   }
 
+
   .search-btn {
+    font: inherit;
     font-size: 14px;
     padding: 10px 40px;
     background: blue;
@@ -35,12 +40,22 @@ a {
     transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 500ms;
   }
 
+  button:disabled{
+    color: #19282f;
+    background-color: rgb(242, 248, 248);
+    cursor: not-allowed;
+   }
+
 .search-btn:hover,
 .search-btn:focus {
-  background-color: rgb(18, 18, 161);
+  background-color: rgb(131, 131, 247);
 }
 
-  .load-more {
+button.hidden{
+display: none;
+}
+
+ .load-more {
     font-size: 14px;
     padding: 10px 20px;
     background-color: blue;
@@ -55,10 +70,7 @@ a {
     transition: background-color cubic-bezier(0.4, 0, 0.2, 1) 500ms;
   }
 
-  .load-more:hover, 
-  .load-more:focus {
-  background-color: rgb(18, 18, 161);
-}
+  
 
 .gallery {
   display: flex;
@@ -85,7 +97,8 @@ a {
 
 .photo-card > img {
   border-radius: 12px;
-}
+ }
+
 .gallery__image {
   height: 100%;
   width: 100%;

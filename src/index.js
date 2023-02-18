@@ -1,19 +1,32 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
 
 import NewsApiServise from './js/NewsApiServise';
 import createMarkup from './js/createmarkup';
-
-const newsApiServise = new NewsApiServise();
-console.log(newsApiServise);
-
+import LoadMoreBtn from './js/LoadMoreBtn';
+import LoadMoreBtn from './js/LoadMoreBtn';
 
 const form = document.getElementById("search-form");
 const ulEl = document.querySelector(".gallery");
-const loadMoreBtn = document.querySelector(".load-more");
 
-// loadMoreBtn.classList.add("is-hidden");
+
+const newsApiServise = new NewsApiServise();
+const loadMoreBtn = new LoadMoreBtn({
+  selector : '#loadMore',
+  isHidden: true
+});
+
+const lightbox = new SimpleLightbox('.gallery__item', {
+  captionDelay: 250,
+  captionsData: 'alt',
+  enableKeyboard: true,
+});
+
+
 form.addEventListener('submit', onSubmit);
-loadMoreBtn.addEventListener('click', fetchHits);
+loadMoreBtn.button.addEventListener('click', fetchHits);
 
  function onSubmit(e){
     e.preventDefault();
@@ -28,28 +41,37 @@ loadMoreBtn.addEventListener('click', fetchHits);
   
     newsApiServise.resetPage();
     clearNewsGallery();
+    loadMoreBtn.show();
     fetchHits().finally(() => form.reset());
 };
 
 function fetchHits(){
+  loadMoreBtn.disabled();
+
  return newsApiServise
  .getGallery()
  .then((hits) =>{
- 
+       
       if (hits.length === 0){
         return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
       }
-    
+      
     return hits.reduce((markup, hit) => 
   createMarkup(hit) + markup ,"");
 })
-   .then(appendNewsGallery)
+   .then((markup)=>{
+    appendNewsGallery (markup);
+    loadMoreBtn.enable();
+   })
     .catch(onError);
 };
 
 function appendNewsGallery (markup){
     ulEl.insertAdjacentHTML ('beforeend',markup);
+    lightbox.refresh();
+   
 };
+
 
 function clearNewsGallery (){
   ulEl.innerHTML = "";
@@ -57,7 +79,10 @@ function clearNewsGallery (){
 
 function onError (err){
     console.error(err);
+    loadMoreBtn.hide();
 };
+
+
 
 
 
