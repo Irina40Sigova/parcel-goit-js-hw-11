@@ -18,11 +18,7 @@ const loadMoreBtn = new LoadMoreBtn({
   isHidden: true
 });
 
-const lightbox = new SimpleLightbox('.gallery__item', {
-  captionDelay: 250,
-  captionsData: 'alt',
-  enableKeyboard: true,
-});
+const lightbox = new SimpleLightbox('.gallery a');
 
 
 form.addEventListener('submit', onSubmit);
@@ -69,6 +65,10 @@ function fetchHits(){
 function appendNewsGallery (markup){
     ulEl.insertAdjacentHTML ('beforeend',markup);
     lightbox.refresh();
+
+    lightbox.on('show.simplelightbox', function () {
+      lightbox.defaultOptions.captionDelay = 250;
+    });
    
 };
 
