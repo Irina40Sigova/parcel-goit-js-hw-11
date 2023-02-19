@@ -42,26 +42,22 @@ loadMoreBtn.button.addEventListener('click', fetchHits);
 };
 
 function fetchHits(){
+
   loadMoreBtn.disabled();
-
+  
  return newsApiServise
- .getGallery().then((response)=>{
-          const totalHits = response.data.totalHits;
-          if (totalHits === 0) {
-           return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-               }
-    if (newsApiServise.page === 1) {
-      Notify.success(`Hooray! We found ${totalHits} images.`);
-      loadMoreBtn.enable();
-    }
- })
+ .getGallery()
  .then((hits) =>{
-       
-    //   if (hits.length === 0){
-    //     return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-    
-    //  }
 
+       if (hits.length === 0 ){
+        loadMoreBtn.hide();
+        return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    } 
+  
+       if (hits.length !==0 ){
+      loadMoreBtn.hide();
+      return Notify.success(`Hooray! We found ${hits.totalHits}images.`);
+  } 
   return hits.reduce((markup, hit) => 
   createMarkup(hit) + markup ,"");
 })
@@ -71,6 +67,7 @@ function fetchHits(){
    })
     .catch(onError);
 };
+
 
 function appendNewsGallery (markup){
     ulEl.insertAdjacentHTML ('beforeend',markup);

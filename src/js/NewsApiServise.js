@@ -11,6 +11,7 @@ export default class NewsApiServise {
     constructor() {
         this.page = 1;
         this.searchQuery = "";
+        this.totalHits = 0;
     }
 
      getGallery () {
@@ -23,12 +24,21 @@ export default class NewsApiServise {
             return hits;
           });
         }
-    nextPage(){
-      this.page +=1;
-    }
-    resetPage(){
-      this.page = 1;
-    }
-};
+
+        get hits() {
+          return this.totalHits;
+        }
+      
+        set hits(newTotalHits) {
+          this.totalHits = newTotalHits;
+        }
+
+        nextPage() {
+          this.page +=1;
+        }
+        resetPage() {
+          this.page = 1;
+       }
+  };
 
 
