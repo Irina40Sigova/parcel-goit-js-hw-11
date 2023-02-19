@@ -50,6 +50,11 @@ function fetchHits(){
        
       if (hits.length === 0){
         return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+        loadMoreBtn.hide();
+      }
+
+      if (totalHits <= 41){
+        return Notify.success(`Hooray!We found ${totalHits} images.`);
       }
       
     return hits.reduce((markup, hit) => 
