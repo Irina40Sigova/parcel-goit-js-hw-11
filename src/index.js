@@ -45,22 +45,27 @@ function fetchHits(){
   loadMoreBtn.disabled();
 
  return newsApiServise
- .getGallery()
+ .getGallery().then((response)=>{
+          const totalHits = response.data.totalHits;
+          if (totalHits === 0) {
+           return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+               }
+    if (newsApiServise.page === 1) {
+      Notify.success(`Hooray! We found ${totalHits} images.`);
+      loadMoreBtn.enable();
+    }
+ })
  .then((hits) =>{
        
-      if (hits.length === 0){
-        return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-        loadMoreBtn.hide();
-      }
+    //   if (hits.length === 0){
+    //     return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    
+    //  }
 
-      if (totalHits <= 41){
-        return Notify.success(`Hooray!We found ${totalHits} images.`);
-      }
-      
-    return hits.reduce((markup, hit) => 
+  return hits.reduce((markup, hit) => 
   createMarkup(hit) + markup ,"");
 })
-   .then((markup)=>{
+.then((markup)=>{
     appendNewsGallery (markup);
     loadMoreBtn.enable();
    })
