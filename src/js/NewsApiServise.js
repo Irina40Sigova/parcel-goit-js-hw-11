@@ -11,26 +11,17 @@ export default class NewsApiServise {
     constructor() {
         this.page = 1;
         this.searchQuery = "";
-        this.totalHits = 0;
+        
     }
 
-     getGallery () {
+  async getGallery () {
         const URL =`${ENDPOINT}?key=${API_KEY}&q=${this.searchQuery}&${NUANCES}&page=${this.page}`;
-        
-         return fetch(URL)
-          .then((response)=> response.json())
-          .then(({hits}) => {
-            this.nextPage();
-            return hits;
-          });
-        }
 
-        get hits() {
-          return this.totalHits;
-        }
-      
-        set hits(newTotalHits) {
-          this.totalHits = newTotalHits;
+        const response = await axios.get(URL);
+           
+        this.nextPage();
+         return response.data
+  
         }
 
         nextPage() {
@@ -40,5 +31,3 @@ export default class NewsApiServise {
           this.page = 1;
        }
   };
-
-
